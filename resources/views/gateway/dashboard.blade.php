@@ -11,6 +11,13 @@ body{background:#e8edf3;color:#16233a}
 .btn-t{background:#16a34a;color:#fff;padding:8px 14px;border-radius:9px;text-decoration:none;font-size:13px;font-weight:800}
 .btn-o{background:rgba(255,255,255,.15);color:#fff;border:none;padding:8px 12px;border-radius:9px;font-size:13px;cursor:pointer}
 .wrap{max-width:1360px;margin:0 auto;padding:12px 14px 24px}
+.pgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:8px}
+@media(max-width:1100px){.pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.pgrid{grid-template-columns:1fr}}
+.pitem{border:1.5px solid #e2e8f0;border-radius:10px;padding:10px;background:#f8fafc}
+.pitem small{display:block}.errline{color:#b91c1c !important;font-weight:700}
+.cols2{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:10px;align-items:start;margin-top:10px}
+@media(max-width:1000px){.cols2{grid-template-columns:1fr}}
 .hero{background:#fff;border:2px solid #16a34a;border-radius:12px;padding:10px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px;text-align:left}
 .hero .ic{font-size:28px}.hero b{font-size:16px;color:#14532d}.hero p{font-size:12.5px;color:#334155}
 .cols{display:grid;grid-template-columns:320px minmax(0,1fr) 360px;gap:10px;align-items:start}
@@ -50,32 +57,21 @@ kbd{background:#0f172a;color:#fff;padding:1px 7px;border-radius:6px;font-size:11
 <form method="POST" action="/logout" style="display:inline">@csrf<button class="btn-o">Keluar</button></form></div>
 </div></div>
 <div class="wrap">
-<div class="hero"><div class="ic">✅</div><div><b>Gateway HIDUP dan siap dipakai</b><p>Halaman terbuka = gateway jalan. Kolom kiri = PUSAT (tujuan), tengah = tes, kanan = konsumen + error.</p></div></div>
-<div class="cols">
-<div>
+<div class="hero"><div class="ic">✅</div><div><b>Gateway HIDUP dan siap dipakai</b><p>Baris status = PUSAT (tujuan akhir). Bawah = uji per konsumen + konsumen + tabel error.</p></div></div>
 <div class="card">
-<span class="tag t-pusat">A — PUSAT (TUJUAN AKHIR)</span>
-<h2>Ini PUSAT, bukan pengirim</h2>
-<div class="d">Yang <b>menyimpan data asli</b>. Merah = pusatnya mati / alamat salah.</div>
-<table><tr><th>Layanan</th><th>Status</th></tr>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span class="tag t-pusat">A — PUSAT (TUJUAN AKHIR, bukan pengirim)</span>
+<button onclick="loadStatus()" style="margin-left:auto;border:2px solid #94a3b8;background:#fff;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer">🔄 Cek ulang</button></div>
+<div class="d">Yang <b>menyimpan data asli</b>. Merah = server gateway tidak bisa mencapai pusat (lihat pesan kecil di bawah status).</div>
+<div class="pgrid">
 @foreach($pusat as $key => $p)
-<tr><td><b>{{ $p['nama'] }}</b><br><small style="font-family:Segoe UI">{{ $p['peran'] }}</small><small>{{ $p['url'] }}</small></td>
-<td style="white-space:nowrap"><span class="dot" id="dot-{{ $key }}"></span><span class="pill p-wait" id="ms-{{ $key }}">Cek…</span></td></tr>
+<div class="pitem"><div style="display:flex;align-items:center;gap:7px"><span class="dot" id="dot-{{ $key }}"></span><b>{{ $p['nama'] }}</b>
+<span class="pill p-wait" id="ms-{{ $key }}" style="margin-left:auto">Cek…</span></div>
+<small>{{ $p['peran'] }}</small><small>{{ $p['url'] }}</small>
+<small class="errline" id="err-{{ $key }}"></small></div>
 @endforeach
-</table>
-<div class="d" style="margin-top:8px"><button onclick="loadStatus()" style="border:2px solid #94a3b8;background:#fff;border-radius:8px;padding:7px 12px;font-size:12.5px;font-weight:700;cursor:pointer">🔄 Cek ulang</button></div>
-</div>
-<div class="card">
-<span class="tag t-kons">B — KONSUMEN (PENGIRIM)</span>
-<h2>Ini KONSUMEN</h2>
-<div class="d">Yang <b>memakai</b> gateway pakai kunci <b>X-GW-KEY</b>.</div>
-<table><tr><th>Siapa</th><th>Untuk apa</th></tr>
-@foreach($konsumen as $k)
-<tr><td><b>{{ $k['nama'] }}</b></td><td style="font-size:12px">{{ $k['pakai'] }}</td></tr>
-@endforeach
-</table>
 </div>
 </div>
+<div class="cols2">
 
 <div class="card">
 <span class="tag t-pusat">C — UJI KONEKSI (per konsumen + per endpoint)</span>
@@ -111,6 +107,15 @@ kbd{background:#0f172a;color:#fff;padding:1px 7px;border-radius:6px;font-size:11
 <tr><td>404</td><td>Salah endpoint, pilih lain.</td></tr>
 <tr><td>500/0</td><td>Pusat mati — buka alamat pusat langsung.</td></tr>
 <tr><td>Langsung OK, Gateway 401</td><td>Token di gateway salah → perbaiki di 🔑 Token.</td></tr>
+<tr><td>no-res / timeout</td><td>Server gateway tidak bisa keluar ke internet / DNS diblokir host → cek curl di Terminal + tanya Jagoan Hosting soal outbound.</td></tr>
+</table>
+</div>
+<div class="card">
+<span class="tag t-kons">B — KONSUMEN (PENGIRIM, pemakai X-GW-KEY)</span>
+<table><tr><th>Siapa</th><th>Untuk apa</th></tr>
+@foreach($konsumen as $k)
+<tr><td><b>{{ $k['nama'] }}</b></td><td style="font-size:12px">{{ $k['pakai'] }}</td></tr>
+@endforeach
 </table>
 </div>
 </div>
@@ -127,11 +132,12 @@ async function loadStatus(){
   try{
     const r=await fetch(window.location.href.replace(/\/$/,'')+'/services-status'); const j=await r.json();
     for(const k in j.data){
-      const v=j.data[k], d=document.getElementById('dot-'+k), m=document.getElementById('ms-'+k);
+      const v=j.data[k], d=document.getElementById('dot-'+k), m=document.getElementById('ms-'+k), e=document.getElementById('err-'+k);
       if(!d||!m)continue;
       d.className='dot '+(v.up?'ok':'bad');
       m.textContent=v.up?('Terhubung ✔ · '+v.ms+'ms'):('Putus ✘ · '+(v.http||'no-res'));
       m.className='pill '+(v.up?'p-ok':'p-bad');
+      if(e)e.textContent=v.up?'':('⁉ '+(v.err||'pusat tidak menjawab, cek outbound/DNS server'));
     }
   }catch(e){}
 }
