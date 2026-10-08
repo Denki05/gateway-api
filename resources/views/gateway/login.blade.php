@@ -6,7 +6,7 @@
 <div class="box">
 <div style="font-size:34px">🚪</div>
 <h1>Masuk Gateway</h1>
-<div class="sub">Panel pengelola koneksi MIS · AO · Transaksi · Drive.<br>Bawaan: <b>admin / admin123</b> — segera ganti di menu Token.</div>
+<!-- <div class="sub">Panel pengelola koneksi MIS · AO · Transaksi · Drive.<br>Bawaan: <b>admin / admin123</b> — segera ganti di menu Token.</div> -->
 @if($errors->any())<div class="err">❌ {{ $errors->first() }}</div>@endif
 <form method="POST" action="/login">@csrf
 <label>Username</label><input name="username" value="{{ old('username') }}" autofocus autocomplete="username">
