@@ -22,7 +22,7 @@ class CutoverController extends Controller
         ];
     }
 
-    private static function load()
+    public static function load()
     {
         $file = storage_path('app/' . self::FILE);
         if (is_file($file)) {

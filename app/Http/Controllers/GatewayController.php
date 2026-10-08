@@ -124,11 +124,31 @@ class GatewayController extends Controller
                 ['label' => 'Agenda (GET /api/agenda/list)', 'method' => 'GET', 'path' => '/api/agenda/list'],
             ],
         ];
+        $routesRows = [
+            ['GET', '/api/v1/drive/list?path=', 'GET drive/api/list', '—', 'Aktif ✅', 'Landing/MIS/AO/APM'],
+            ['POST', '/api/v1/trans/so-awal/store', 'POST trans/api/ao/so-awal/store', 'AO_API_KEY', 'Aktif ✅', 'AO'],
+            ['GET', '/api/v1/drive/cms/*', 'GET drive/api/hero-data…', '—', 'Menyusul', 'Landing'],
+            ['GET', '/api/v1/trans/master/*', 'GET trans/api/products…', '—', 'Menyusul', 'MIS/AO/APM'],
+            ['GET/POST', '/api/v1/trans/so-awal/*', 'trans/api/ao/so-awal/*', 'AO_API_KEY', 'Menyusul', 'AO'],
+            ['POST', '/api/v1/ao/inbound/*', 'POST ao/api/ao/notif…', 'AGENDA_TOKEN/AO_KEY', 'Menyusul', 'Transaksi/MIS'],
+            ['GET/POST', '/api/v1/ao/agenda|tasks|doctor/*', 'ao/api/…', 'AGENDA_TOKEN', 'Menyusul', 'MIS'],
+            ['GET/POST', '/api/v1/mis/prospek|events|customers/*', 'mis/api/…', 'MIS_API_KEY', 'Menyusul', 'AO/APM'],
+            ['GET', '/api/v1/trans/users/*', 'trans/api/superusers…', 'USER_API_KEY', 'Menyusul', 'AO'],
+            ['*', '/api/v1/trans/picker/*', 'trans/api/picker/*', 'token picker', 'Terakhir', 'Picker'],
+        ];
+        $cutoverItems = \App\Http\Controllers\CutoverController::load();
+        $cutoverDone = collect($cutoverItems)->where('done', true)->count();
         return view('gateway.dashboard', [
             'gwToken' => $gw['token'],
             'pusat' => $pusat,
             'konsumen' => $konsumen,
             'uji' => $uji,
+            'routesRows' => $routesRows,
+            'cutoverItems' => $cutoverItems,
+            'cutoverDone' => $cutoverDone,
+            'cutoverTotal' => count($cutoverItems),
+            'setFields' => \App\Support\GatewaySettings::fields(),
+            'setValues' => \App\Support\GatewaySettings::all(),
         ]);
     }
 
