@@ -34,7 +34,7 @@ body{background:#e8edf3;color:#16233a;padding:0}
 </style>
 </head><body>
 <div class="top"><div class="topin"><a href="/" style="color:#fff;text-decoration:none;font-size:22px">🚪</a><h1 style="color:#fff">🔑 Token Pusat</h1>
-<div style="margin-left:auto;display:flex;gap:6px"><a href="/" style="background:rgba(255,255,255,.12);color:#fff;padding:7px 12px;border-radius:8px;text-decoration:none;font-size:12.5px;font-weight:700">🏠 Panel</a><a href="/help" style="background:rgba(255,255,255,.12);color:#fff;padding:7px 12px;border-radius:8px;text-decoration:none;font-size:12.5px;font-weight:700">❓ Bantuan</a></div></div></div>
+<div style="margin-left:auto;display:flex;gap:6px;flex-wrap:wrap"><a href="/" style="background:rgba(255,255,255,.12);color:#fff;padding:7px 12px;border-radius:8px;text-decoration:none;font-size:12.5px;font-weight:700">🏠 Panel</a><a href="/routes" style="background:rgba(255,255,255,.12);color:#fff;padding:7px 12px;border-radius:8px;text-decoration:none;font-size:12.5px;font-weight:700">🗺️ Rute</a><a href="/cutover" style="background:rgba(255,255,255,.12);color:#fff;padding:7px 12px;border-radius:8px;text-decoration:none;font-size:12.5px;font-weight:700">✅ Cutover</a><a href="/help" style="background:rgba(255,255,255,.12);color:#fff;padding:7px 12px;border-radius:8px;text-decoration:none;font-size:12.5px;font-weight:700">❓ Bantuan</a></div></div></div>
 <div class="wrap">
 @if(session('ok'))<div class="alert-ok">✅ {{ session('ok') }}</div>@endif
 <p class="lead">Isi cukup sekali di sini. <b>Berlaku langsung</b>, tidak perlu buka kode / restart. Kolom bertanda <b style="background:#fef9c3;padding:0 6px;border:1px solid #eab308;border-radius:6px">BELUM DIISI</b> berarti masih kosong dan wajib dilengkapi.</p>

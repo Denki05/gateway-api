@@ -137,6 +137,24 @@ class GatewayController extends Controller
         return view('gateway.help');
     }
 
+    // GET /routes — katalog rute gateway ↔ endpoint pusat (dibaca staf sebelum cutover)
+    public function routes()
+    {
+        $rows = [
+            ['GET', '/api/v1/drive/list?path=', 'GET drive/api/list', '—', 'Aktif ✅', 'Landing/MIS/AO/APM'],
+            ['POST', '/api/v1/trans/so-awal/store', 'POST trans/api/ao/so-awal/store', 'AO_API_KEY', 'Aktif ✅', 'AO'],
+            ['GET', '/api/v1/drive/cms/*', 'GET drive/api/hero-data…', '—', 'Menyusul', 'Landing'],
+            ['GET', '/api/v1/trans/master/*', 'GET trans/api/products…', '—', 'Menyusul', 'MIS/AO/APM'],
+            ['GET/POST', '/api/v1/trans/so-awal/*', 'trans/api/ao/so-awal/*', 'AO_API_KEY', 'Menyusul', 'AO'],
+            ['POST', '/api/v1/ao/inbound/*', 'POST ao/api/ao/notif…', 'AGENDA_TOKEN/AO_KEY', 'Menyusul', 'Transaksi/MIS'],
+            ['GET/POST', '/api/v1/ao/agenda|tasks|doctor/*', 'ao/api/…', 'AGENDA_TOKEN', 'Menyusul', 'MIS'],
+            ['GET/POST', '/api/v1/mis/prospek|events|customers/*', 'mis/api/…', 'MIS_API_KEY', 'Menyusul', 'AO/APM'],
+            ['GET', '/api/v1/trans/users/*', 'trans/api/superusers…', 'USER_API_KEY', 'Menyusul', 'AO'],
+            ['*', '/api/v1/trans/picker/*', 'trans/api/picker/*', 'token picker', 'Terakhir', 'Picker'],
+        ];
+        return view('gateway.routes', ['rows' => $rows]);
+    }
+
     // POST /test-endpoint {konsumen, service, path, mode: gateway|langsung}
     // gateway = lewat kunci gateway (simulasi konsumen). langsung = tembak pusat tanpa gateway.
     public function testEndpoint(Request $request)
