@@ -179,19 +179,29 @@ class GatewayController extends Controller
     // GET /services-status (dipakai dashboard via AJAX, tanpa auth agar bisa dibuka cepat)
     public function servicesStatus()
     {
-        $out = [];
-        foreach (config('gateway.services') as $name => $s) {
-            $base = rtrim($s['base_url'] ?? '', '/');
-            $t0 = microtime(true);
-            try {
-                $res = $this->client()->get($base, ['timeout' => 6, 'connect_timeout' => 4]);
-                $ms = (int) ((microtime(true) - $t0) * 1000);
-                $out[$name] = ['up' => $res->getStatusCode() < 500, 'http' => $res->getStatusCode(), 'ms' => $ms];
-            } catch (\Exception $e) {
-                $ms = (int) ((microtime(true) - $t0) * 1000);
-                $out[$name] = ['up' => false, 'http' => 0, 'ms' => $ms, 'err' => substr($e->getMessage(), 0, 120)];
+        try {
+            $out = [];
+            $services = config('gateway.services', []);
+            foreach ($services as $name => $s) {
+                $base = rtrim($s['base_url'] ?? '', '/');
+                if (empty($base)) {
+                    $out[$name] = ['up' => false, 'http' => 0, 'ms' => 0, 'err' => 'base_url kosong'];
+                    continue;
+                }
+                $t0 = microtime(true);
+                try {
+                    $res = $this->client()->get($base, ['timeout' => 6, 'connect_timeout' => 4]);
+                    $ms = (int) ((microtime(true) - $t0) * 1000);
+                    $out[$name] = ['up' => $res->getStatusCode() < 500, 'http' => $res->getStatusCode(), 'ms' => $ms];
+                } catch (\Throwable $e) {
+                    $ms = (int) ((microtime(true) - $t0) * 1000);
+                    $out[$name] = ['up' => false, 'http' => 0, 'ms' => $ms, 'err' => substr($e->getMessage(), 0, 150)];
+                }
             }
+            return response()->json(['success' => true, 'data' => $out, 'time' => now()->toDateTimeString()]);
+        } catch (\Throwable $e) {
+            Log::error('GW servicesStatus fatal: ' . $e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Status check gagal: ' . substr($e->getMessage(), 0, 150)], 500);
         }
-        return response()->json(['success' => true, 'data' => $out, 'time' => now()->toDateTimeString()]);
     }
 }
