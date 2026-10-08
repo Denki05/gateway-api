@@ -20,5 +20,6 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/services-status', 'GatewayController@servicesStatus');
     Route::get('/settings', 'SettingsController@show');
     Route::post('/settings', 'SettingsController@save');
+    Route::get('/help', 'GatewayController@help');
     Route::post('/test-endpoint', 'GatewayController@testEndpoint');
 });

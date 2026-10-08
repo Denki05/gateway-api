@@ -132,6 +132,11 @@ class GatewayController extends Controller
         ]);
     }
 
+    public function help()
+    {
+        return view('gateway.help');
+    }
+
     // POST /test-endpoint {konsumen, service, path, mode: gateway|langsung}
     // gateway = lewat kunci gateway (simulasi konsumen). langsung = tembak pusat tanpa gateway.
     public function testEndpoint(Request $request)
