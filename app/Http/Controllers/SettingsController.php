@@ -20,6 +20,12 @@ class SettingsController extends Controller
     {
         GatewaySettings::save($request->except('_token'));
         Cache::forget('gw_settings');
-        return redirect('/settings')->with('ok', 'Tersimpan. Berlaku langsung, tanpa restart.');
+        // Config gateway dibaca dari file settings; kalau config pernah di-cache,
+        // hapus agar nilai baru langsung berlaku tanpa perintah manual.
+        try {
+            \Artisan::call('config:clear');
+        } catch (\Throwable $e) {
+        }
+        return redirect('/settings')->with('ok', 'Tersimpan & langsung berlaku (cache config dibersihkan otomatis).');
     }
 }

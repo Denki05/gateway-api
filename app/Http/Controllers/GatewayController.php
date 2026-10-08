@@ -117,7 +117,7 @@ class GatewayController extends Controller
             ],
             'mis' => [
                 ['label' => 'Progress officer (GET /api/events/officer-progress)', 'method' => 'GET', 'path' => '/api/events/officer-progress?officer=test'],
-                ['label' => 'Prospek saya (GET /api/v1/prospek/my-data)', 'method' => 'GET', 'path' => '/api/v1/prospek/my-data'],
+                ['label' => 'Prospek saya (GET /api/v1/prospek/my-data)', 'method' => 'GET', 'path' => '/api/v1/prospek/my-data?user_id=test'],
             ],
             'ao' => [
                 ['label' => 'Tasks (GET /api/tasks)', 'method' => 'GET', 'path' => '/api/tasks'],
