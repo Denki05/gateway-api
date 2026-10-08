@@ -3,158 +3,188 @@
 <title>Panel Gateway API</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:"Segoe UI",Arial,sans-serif}
-body{background:#e8edf3;color:#16233a}
-.top{background:#0f2160;color:#fff;padding:12px 18px;position:sticky;top:0;z-index:5}
-.topin{max-width:1360px;margin:0 auto;display:flex;align-items:center;gap:10px}
-.top h1{font-size:16px}.top small{color:#c7d6ff;font-size:12px;display:block}
+body{background:#eef2f7;color:#1e293b}
+.top{background:#0f2160;color:#fff;padding:10px 16px;position:sticky;top:0;z-index:5}
+.topin{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.top h1{font-size:15px}.top small{color:#c7d6ff;font-size:11.5px;display:block}
 .top .acts{margin-left:auto;display:flex;gap:8px}
 .btn-t{background:#16a34a;color:#fff;padding:8px 14px;border-radius:9px;text-decoration:none;font-size:13px;font-weight:800}
 .btn-o{background:rgba(255,255,255,.15);color:#fff;border:none;padding:8px 12px;border-radius:9px;font-size:13px;cursor:pointer}
-.wrap{max-width:1360px;margin:0 auto;padding:12px 14px 24px}
-.pgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:8px}
-@media(max-width:1100px){.pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:640px){.pgrid{grid-template-columns:1fr}}
-.pitem{border:1.5px solid #e2e8f0;border-radius:10px;padding:10px;background:#f8fafc}
-.pitem small{display:block}.errline{color:#b91c1c !important;font-weight:700}
-.cols2{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:10px;align-items:start;margin-top:10px}
-@media(max-width:1000px){.cols2{grid-template-columns:1fr}}
-.hero{background:#fff;border:2px solid #16a34a;border-radius:12px;padding:10px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px;text-align:left}
-.hero .ic{font-size:28px}.hero b{font-size:16px;color:#14532d}.hero p{font-size:12.5px;color:#334155}
-.cols{display:grid;grid-template-columns:320px minmax(0,1fr) 360px;gap:10px;align-items:start}
-@media(max-width:1100px){.cols{grid-template-columns:1fr 1fr}}
-@media(max-width:720px){.cols{grid-template-columns:1fr}.hero{flex-direction:column;text-align:center}}
-.card{background:#fff;border:1.5px solid #cbd5e1;border-radius:14px;padding:14px 16px;margin-bottom:12px}
-.card h2{font-size:15px;margin-bottom:2px}
-.tag{display:inline-block;font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:6px;letter-spacing:.5px;margin-bottom:6px}
+.wrap{max-width:1280px;margin:0 auto;padding:12px 14px 32px}
+.hero{background:#fff;border:2px solid #16a34a;border-radius:12px;padding:10px 16px;margin-bottom:10px;display:flex;align-items:center;gap:12px}
+.hero b{font-size:15.5px;color:#14532d}.hero p{font-size:12.5px;color:#475569}
+.hero .auto{margin-left:auto;font-size:11.5px;color:#475569;text-align:right;white-space:nowrap}
+.hero .auto button{border:2px solid #94a3b8;background:#fff;border-radius:8px;padding:5px 10px;font-size:11.5px;font-weight:700;cursor:pointer;margin-top:4px}
+.card{background:#fff;border:1.5px solid #cbd5e1;border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.card h2{font-size:14.5px;margin-bottom:2px}
+.d{font-size:12.5px;color:#475569;margin-bottom:10px;line-height:1.55}
+.tag{display:inline-block;font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:6px;letter-spacing:.4px;margin-bottom:6px}
 .t-pusat{background:#dbeafe;color:#1e3a8a;border:1px solid #3b82f6}
 .t-kons{background:#dcfce7;color:#14532d;border:1px solid #16a34a}
-.d{font-size:12.5px;color:#475569;margin-bottom:10px;line-height:1.55}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{background:#0f172a;color:#fff;padding:8px;text-align:left;font-size:11.5px}
-td{padding:9px 8px;border-bottom:1.5px solid #e2e8f0;vertical-align:top;color:#1e293b}
-td small{font-family:Consolas,monospace;font-size:11.5px;color:#475569;display:block}
-.dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:#eab308;margin-right:6px;vertical-align:middle}
-.dot.ok{background:#16a34a}.dot.bad{background:#dc2626}
-.pill{font-size:12px;font-weight:800;padding:3px 9px;border-radius:7px;white-space:nowrap}
+.t-uji{background:#fef9c3;color:#713f12;border:1px solid #eab308}
+.pgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:8px}
+@media(max-width:1100px){.pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.pgrid{grid-template-columns:1fr}}
+.pitem{border:1.5px solid #e2e8f0;border-radius:10px;padding:10px 12px;background:#f8fafc}
+.pitem .nm{display:flex;align-items:center;gap:7px;font-weight:800;font-size:13.5px}
+.pitem small{display:block;color:#475569;font-size:11.5px;margin-top:2px;word-break:break-all}
+.pill{font-size:11.5px;font-weight:800;padding:3px 9px;border-radius:7px;white-space:nowrap}
 .p-ok{background:#dcfce7;color:#14532d;border:1.5px solid #16a34a}.p-bad{background:#fee2e2;color:#7f1d1d;border:1.5px solid #dc2626}.p-wait{background:#fef9c3;color:#713f12;border:1.5px solid #eab308}
-label.f{font-size:12.5px;font-weight:800;display:block;margin:10px 0 4px;color:#0f172a}
-select{width:100%;padding:10px;border:2px solid #94a3b8;border-radius:9px;font-size:13.5px;background:#fff;color:#0f172a}
-.radio{display:flex;gap:8px;margin-top:6px}
-.radio label{flex:1;border:2px solid #94a3b8;border-radius:9px;padding:9px;font-size:12.5px;cursor:pointer;text-align:center}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;background:#eab308}
+.dot.ok{background:#16a34a}.dot.bad{background:#dc2626}
+.errline{color:#b91c1c !important;font-weight:700}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:10px;align-items:start}
+@media(max-width:1000px){.main{grid-template-columns:1fr}}
+label.f{font-size:12.5px;font-weight:800;display:block;margin:9px 0 4px}
+label.f small{font-weight:400;color:#64748b}
+select{width:100%;padding:9px 10px;border:2px solid #94a3b8;border-radius:9px;font-size:13px;background:#fff;color:#0f172a}
+.radio{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.radio label{border:2px solid #94a3b8;border-radius:9px;padding:9px;font-size:12px;cursor:pointer;text-align:center;line-height:1.4}
+.radio label small{display:block;color:#64748b;font-weight:400}
 .radio input{display:none}
-.radio input:checked+span{font-weight:800}
-.radio label:has(input:checked){border-color:#1d4ed8;background:#eff6ff}
-button.act{width:100%;background:#1d4ed8;color:#fff;border:none;padding:12px;border-radius:10px;font-size:14.5px;font-weight:800;cursor:pointer;margin-top:10px}
-.out{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:12px;margin-top:10px;font-size:13px;line-height:1.6;white-space:pre-wrap}
-table.err{font-size:12.5px}table.err td:first-child{font-weight:800;white-space:nowrap}
-kbd{background:#0f172a;color:#fff;padding:1px 7px;border-radius:6px;font-size:11.5px;font-family:Consolas,monospace}
+.radio label:has(input:checked){border-color:#1d4ed8;background:#eff6ff;box-shadow:0 0 0 2px #bfdbfe}
+button.act{width:100%;background:#1d4ed8;color:#fff;border:none;padding:12px;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;margin-top:10px}
+button.act:disabled{background:#94a3b8;cursor:wait}
+.out{border-radius:10px;padding:12px;margin-top:10px;font-size:13px;line-height:1.6;white-space:pre-wrap;border:2px solid #e2e8f0;background:#f8fafc;color:#1e293b}
+.out.ok{border-color:#16a34a;background:#f0fdf4}
+.out.fail{border-color:#dc2626;background:#fef2f2}
+.out a{color:#1d4ed8;font-weight:800}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{background:#0f172a;color:#fff;padding:7px 8px;text-align:left;font-size:11px}
+td{padding:8px;border-bottom:1.5px solid #e2e8f0;vertical-align:top;color:#1e293b}
+kbd{background:#0f172a;color:#fff;padding:1px 7px;border-radius:6px;font-size:11px;font-family:Consolas,monospace}
+.cap{font-size:11.5px;color:#64748b;margin-top:6px;line-height:1.5}
 </style>
 </head><body>
 <div class="top"><div class="topin">
-<div style="font-size:26px">🚪</div>
+<div style="font-size:24px">🚪</div>
 <div><h1>Panel Gateway API</h1><small>1 pintu untuk semua aplikasi</small></div>
 <div class="acts"><a class="btn-t" href="/settings">🔑 Token</a>
 <form method="POST" action="/logout" style="display:inline">@csrf<button class="btn-o">Keluar</button></form></div>
 </div></div>
 <div class="wrap">
-<div class="hero"><div class="ic">✅</div><div><b>Gateway HIDUP dan siap dipakai</b><p>Baris status = PUSAT (tujuan akhir). Bawah = uji per konsumen + konsumen + tabel error.</p></div></div>
+<div class="hero"><div style="font-size:26px">✅</div>
+<div><b>Gateway hidup. Di bawah ini kondisi tiap aplikasi tujuan.</b><p>Hijau = bisa dihubungi. Merah = tidak bisa dihubungi (baca pesan merah kecilnya).</p></div>
+<div class="auto">Cek otomatis tiap <b id="cd">30</b> dtk<br><span id="upd">Terakhir: -</span><br><button id="pauseBtn" onclick="toggleAuto()">⏸ Jeda</button></div>
+</div>
+
 <div class="card">
-<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><span class="tag t-pusat">A — PUSAT (TUJUAN AKHIR, bukan pengirim)</span>
-<button onclick="loadStatus()" style="margin-left:auto;border:2px solid #94a3b8;background:#fff;border-radius:8px;padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer">🔄 Cek ulang</button></div>
-<div class="d">Yang <b>menyimpan data asli</b>. Merah = server gateway tidak bisa mencapai pusat (lihat pesan kecil di bawah status).</div>
+<span class="tag t-pusat">A — APLIKASI TUJUAN (pemilik data asli)</span>
+<h2>Apakah aplikasi tujuan bisa dihubungi?</h2>
+<div class="d">Ini tes sambungan saja (belum pakai token). Kalau merah, berarti alamat salah / aplikasinya mati / server tidak bisa keluar internet.</div>
 <div class="pgrid">
 @foreach($pusat as $key => $p)
-<div class="pitem"><div style="display:flex;align-items:center;gap:7px"><span class="dot" id="dot-{{ $key }}"></span><b>{{ $p['nama'] }}</b>
+<div class="pitem"><div class="nm"><span class="dot" id="dot-{{ $key }}"></span>{{ $p['nama'] }}
 <span class="pill p-wait" id="ms-{{ $key }}" style="margin-left:auto">Cek…</span></div>
 <small>{{ $p['peran'] }}</small><small>{{ $p['url'] }}</small>
 <small class="errline" id="err-{{ $key }}"></small></div>
 @endforeach
 </div>
 </div>
-<div class="cols2">
 
+<div class="main">
 <div class="card">
-<span class="tag t-pusat">C — UJI KONEKSI (per konsumen + per endpoint)</span>
-<h2>Tes 2 jalur: via gateway / langsung ke pusat</h2>
-<div class="d"><b>Via Gateway</b> = kondisi asli (gateway tempelkan kunci otomatis). <b>Langsung</b> = tembak pusat tanpa gateway, untuk vonis pusatnya hidup/mati.</div>
+<span class="tag t-uji">B — COBA MINTA DATA (tes pakai token)</span>
+<h2>Coba minta data seperti aplikasi aslinya</h2>
+<div class="d">Contoh: pura-pura jadi <b>Landing</b> yang minta daftar file ke <b>Drive</b>. Pilih lewat gateway (kondisi asli) atau langsung (pembanding).</div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-<div><label class="f">1. Sebagai konsumen</label>
+<div><label class="f">1. Siapa yang meminta? <small>— pura-pura jadi…</small></label>
 <select id="kons"><option>MIS</option><option>AO</option><option>APM</option><option>LANDING</option><option>PICKER</option></select></div>
-<div><label class="f">2. Pusat dituju</label>
+<div><label class="f">2. Minta ke siapa? <small>— pemilik datanya</small></label>
 <select id="svc" onchange="fillEp()">
 @foreach($pusat as $key => $p)<option value="{{ $key }}">{{ $p['nama'] }} — {{ $p['peran'] }}</option>@endforeach
 </select></div>
 </div>
-<label class="f">3. Endpoint</label>
+<label class="f">3. Minta apa? <small>— datanya</small></label>
 <select id="ep"></select>
-<label class="f">4. Jalur</label>
+<label class="f">4. Lewat mana?</label>
 <div class="radio">
-<label><input type="radio" name="mode" value="gateway" checked><span>↔ Via Gateway</span></label>
-<label><input type="radio" name="mode" value="langsung"><span>→ Langsung</span></label>
+<label><input type="radio" name="mode" value="gateway" checked><b>↔ Lewat gateway</b><small>Seperti aslinya, kunci ditempel otomatis</small></label>
+<label><input type="radio" name="mode" value="langsung"><b>→ Langsung</b><small>Tanpa gateway, untuk pembanding</small></label>
 </div>
-<button class="act" onclick="jalanTes()">▶ Jalankan tes</button>
-<div class="out" id="out">Belum dites.</div>
-<div class="d" style="margin-top:8px">Pakai: <b>/api/v1/drive/list?path=/</b> + header <b>X-GW-KEY</b> · 200 = ok, 401 = kunci salah.</div>
+<button class="act" id="goBtn" onclick="jalanTes()">▶ Coba sekarang</button>
+<div class="out" id="out">Belum dicoba. Atur 1–4 lalu tekan tombol biru.</div>
+<div class="cap">Catatan: hasil <b>401</b> = kunci salah (wajar sebelum token diisi). Hasil <b>200</b> = jalur + kunci benar.</div>
 </div>
 
 <div>
 <div class="card">
-<h2>🛠 Error & penanganan</h2>
-<table class="err">
-<tr><th>Hasil</th><th>Penanganan</th></tr>
-<tr><td>200 ✅</td><td>Berhasil, siap dipakai.</td></tr>
-<tr><td>401</td><td>Gateway: betulkan di 🔑 Token. Langsung: wajar (butuh kunci).</td></tr>
-<tr><td>404</td><td>Salah endpoint, pilih lain.</td></tr>
-<tr><td>500/0</td><td>Pusat mati — buka alamat pusat langsung.</td></tr>
-<tr><td>Langsung OK, Gateway 401</td><td>Token di gateway salah → perbaiki di 🔑 Token.</td></tr>
-<tr><td>no-res / timeout</td><td>Server gateway tidak bisa keluar ke internet / DNS diblokir host → cek curl di Terminal + tanya Jagoan Hosting soal outbound.</td></tr>
+<span class="tag t-kons">C — SIAPA PEMAKAINYA</span>
+<h2>Aplikasi yang memakai gateway</h2>
+<div class="d">Mereka menghubungi gateway pakai 1 kunci: <kbd>X-GW-KEY</kbd>.</div>
+<table><tr><th>Siapa</th><th>Buat apa</th></tr>
+@foreach($konsumen as $k)
+<tr><td><b>{{ $k['nama'] }}</b></td><td>{{ $k['pakai'] }}</td></tr>
+@endforeach
 </table>
 </div>
 <div class="card">
-<span class="tag t-kons">B — KONSUMEN (PENGIRIM, pemakai X-GW-KEY)</span>
-<table><tr><th>Siapa</th><th>Untuk apa</th></tr>
-@foreach($konsumen as $k)
-<tr><td><b>{{ $k['nama'] }}</b></td><td style="font-size:12px">{{ $k['pakai'] }}</td></tr>
-@endforeach
+<h2>🛠 Arti hasil & yang dilakukan</h2>
+<table>
+<tr><th>Hasil</th><th>Artinya → lakukan ini</th></tr>
+<tr><td><b>200 ✅</b></td><td>Berhasil. Siap dipakai.</td></tr>
+<tr><td><b>401</b></td><td>Kunci salah → buka <a href="/settings">🔑 Token</a>, perbaiki, Simpan, coba lagi.</td></tr>
+<tr><td><b>404</b></td><td>Nama data salah → pilih data lain di langkah 3.</td></tr>
+<tr><td><b>500 / no-res</b></td><td>Aplikasi tujuan mati / tidak terjangkau → buka alamatnya langsung di browser.</td></tr>
 </table>
+</div>
 </div>
 </div>
 </div>
 <script>
 const UJI = @json($uji);
 const CSRF = @json(csrf_token());
+let auto = true, cd = 30, timer = null;
 function fillEp(){
   const s=document.getElementById('svc').value, ep=document.getElementById('ep');
   ep.innerHTML='';
-  (UJI[s]||[]).forEach((e,i)=>{const o=document.createElement('option');o.value=e.path;o.textContent=e.label;ep.appendChild(o);});
+  (UJI[s]||[]).forEach(e=>{const o=document.createElement('option');o.value=e.path;o.textContent=e.label;ep.appendChild(o);});
 }
-async function loadStatus(){
+function stamp(){const d=new Date();document.getElementById('upd').textContent='Terakhir: '+d.toLocaleTimeString('id-ID');}
+async function loadStatus(silent){
   try{
     const r=await fetch(window.location.href.replace(/\/$/,'')+'/services-status'); const j=await r.json();
-    for(const k in j.data){
+    for(const k in (j.data||{})){
       const v=j.data[k], d=document.getElementById('dot-'+k), m=document.getElementById('ms-'+k), e=document.getElementById('err-'+k);
       if(!d||!m)continue;
       d.className='dot '+(v.up?'ok':'bad');
-      m.textContent=v.up?('Terhubung ✔ · '+v.ms+'ms'):('Putus ✘ · '+(v.http||'no-res'));
+      m.textContent=v.up?('Bisa ✔ · '+v.ms+'ms'):('Tidak ✘');
       m.className='pill '+(v.up?'p-ok':'p-bad');
-      if(e)e.textContent=v.up?'':('⁉ '+(v.err||'pusat tidak menjawab, cek outbound/DNS server'));
+      if(e)e.textContent=v.up?'':('Sebab: '+(v.err||'tidak menjawab ('+(v.http||'no-res')+')'));
     }
-  }catch(e){}
+    stamp();
+  }catch(e){ if(!silent){} }
+}
+function toggleAuto(){
+  auto=!auto;
+  document.getElementById('pauseBtn').textContent=auto?'⏸ Jeda':'▶ Jalan';
+  if(auto)startAuto();
+  else{clearInterval(timer);document.getElementById('cd').textContent='jeda';}
+}
+function startAuto(){
+  clearInterval(timer); cd=30;
+  timer=setInterval(()=>{
+    cd--;
+    if(cd<=0){loadStatus(true);cd=30;}
+    document.getElementById('cd').textContent=auto?cd:'jeda';
+  },1000);
 }
 async function jalanTes(){
-  const out=document.getElementById('out');
+  const out=document.getElementById('out'), btn=document.getElementById('goBtn');
   const kons=document.getElementById('kons').value, svc=document.getElementById('svc').value;
   const ep=document.getElementById('ep').value;
   const mode=document.querySelector('input[name=mode]:checked').value;
-  out.textContent='⏳ Mengetes sebagai '+kons+' → '+svc.toUpperCase()+' '+ep+' ('+(mode==='gateway'?'via gateway':'langsung ke pusat')+')…';
+  btn.disabled=true; btn.textContent='⏳ Mencoba…';
+  out.className='out'; out.textContent='Mencoba sebagai '+kons+' meminta '+ep+' '+(mode==='gateway'?'lewat gateway…':'langsung ke aplikasi…');
   try{
     const r=await fetch(window.location.href.replace(/\/$/,'')+'/test-endpoint',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-TOKEN':CSRF},body:JSON.stringify({konsumen:kons,service:svc,path:ep,mode:mode})});
     const j=await r.json();
-    if(j.success&&j.http<400){out.textContent='✅ BERHASIL ('+j.http+', '+j.ms+'ms)\nSebagai: '+kons+' | Jalur: '+mode+'\n\nArtinya: jalur ini BENAR dan siap dipakai.\n\nCuplikan:\n'+(j.body||'-').substring(0,500);}
-    else if(j.http===401){out.textContent='❌ 401 Kunci salah.\nSebagai: '+kons+' | Jalur: '+mode+'\n\nPenanganan:\n- Jalur gateway → buka 🔑 Token, perbaiki token '+svc.toUpperCase()+', Simpan, tes ulang.\n- Jalur langsung → wajar untuk endpoint privat (memang butuh kunci).';}
-    else{out.textContent='⚠️ Gagal ('+(j.http||'no-res')+', '+j.ms+'ms)\nSebagai: '+kons+' | Jalur: '+mode+'\n\nPenanganan: lihat tabel error. Kemungkinan pusat '+svc.toUpperCase()+' mati / alamat salah.\n\nDetail:\n'+((j.body||j.error||'-')).substring(0,500);}
-  }catch(e){out.textContent='❌ Tidak bisa menghubungi gateway: '+e.message;}
+    if(j.success&&j.http<400){out.className='out ok';out.textContent='✅ BERHASIL ('+j.http+', '+j.ms+'ms)\n'+kons+' → '+svc.toUpperCase()+' '+ep+'\nJalur ini benar dan siap dipakai.\n\nCuplikan data:\n'+(j.body||'-').substring(0,400);}
+    else if(j.http===401){out.className='out fail';out.innerHTML='❌ Kunci salah (401).\n'+kons+' → '+svc.toUpperCase()+'\nBuka <a href="/settings">🔑 Token</a>, perbaiki token '+svc.toUpperCase()+', Simpan, lalu coba lagi.';}
+    else{out.className='out fail';out.textContent='⚠️ Belum berhasil ('+(j.http||'no-res')+', '+j.ms+'ms)\n'+kons+' → '+svc.toUpperCase()+'\nKemungkinan: token belum diisi (wajar sebelum weekend) atau aplikasi tujuan mati.\n\nDetail:\n'+((j.body||j.error||'-')).substring(0,400);}
+  }catch(e){out.className='out fail';out.textContent='❌ Gateway tidak menjawab: '+e.message;}
+  btn.disabled=false; btn.textContent='▶ Coba sekarang';
 }
-fillEp(); loadStatus();
+fillEp(); loadStatus(false); startAuto();
 </script>
 </body></html>
