@@ -25,8 +25,8 @@ kbd{background:#0f172a;color:#fff;padding:1px 7px;border-radius:6px;font-size:11
 </head><body>
 <div class="top"><div class="topin">
 <div style="font-size:22px">🚪</div><h1>Gateway API</h1>
-<div class="nav"><a href="/">Panel</a><a href="/settings" class="btn-t">🔑 Token</a><a href="/help" class="on">Bantuan</a>
-<form method="POST" action="/logout" style="display:inline">@csrf<button style="background:rgba(255,255,255,.12);color:#fff" class="nav" type="submit">Keluar</button></form></div>
+<div class="nav"><a href="/">🏠 Panel</a><a href="/settings" class="btn-t">🔑 Token</a><a href="/help" class="on">🛟 Bantuan</a>
+<form method="POST" action="/logout" style="display:inline">@csrf<button style="background:rgba(255,255,255,.12);color:#fff" class="nav" type="submit">🚪 Keluar</button></form></div>
 </div></div>
 <div class="wrap">
 <div class="helpdesk">🛟 <b>Helpdesk gateway:</b> kalau panel menunjukkan merah / tes gagal dan panduan di bawah belum membantu, hubungi <b>tim IT (admin gateway)</b> sertakan: jam kejadian + nama PENERIMA + nama PUSAT + hasil tes (copy teksnya). Jangan kirim kunci asli lewat chat umum.</div>

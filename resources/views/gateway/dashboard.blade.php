@@ -55,8 +55,8 @@ td{padding:7px 8px;border-bottom:1.5px solid #e2e8f0;vertical-align:top}
 </head><body>
 <div class="top"><div class="topin">
 <div style="font-size:22px">🚪</div><h1>Gateway API</h1>
-<div class="nav"><a href="/" class="on">Panel</a><a href="/settings" class="btn-t">🔑 Token</a><a href="/help">Bantuan</a>
-<form method="POST" action="/logout" style="display:inline">@csrf<button type="submit">Keluar</button></form></div>
+<div class="nav"><a href="/" class="on">🏠 Panel</a><a href="/settings" class="btn-t">🔑 Token</a><a href="/help">🛟 Bantuan</a>
+<form method="POST" action="/logout" style="display:inline">@csrf<button type="submit">🚪 Keluar</button></form></div>
 </div></div>
 <div class="wrap">
 <div class="hero"><div style="font-size:24px">✅</div>
