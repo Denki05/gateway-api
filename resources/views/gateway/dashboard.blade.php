@@ -61,11 +61,15 @@ td code{font-family:Consolas,monospace;font-size:11px;background:#f1f5f9;padding
 .item{display:flex;gap:10px;align-items:flex-start;padding:9px 4px;border-bottom:1.5px solid #e2e8f0;font-size:13px}
 .item input{width:19px;height:19px;margin-top:1px;accent-color:#16a34a}
 .item.done span{text-decoration:line-through;color:#64748b}
-.sect{border:1.5px solid #e2e8f0;border-radius:9px;margin-bottom:10px;overflow:hidden}
-.sect-h{background:#f8fafc;padding:8px 12px;font-size:13px;font-weight:800;border-bottom:1.5px solid #e2e8f0}
-.sect-b{padding:10px 12px}
-.fld{margin-bottom:9px}.fld label{font-size:12px;font-weight:800;display:block;margin-bottom:3px}
-.fld .hint{font-size:11px;color:#64748b;margin-top:3px}
+.sect{border:1.5px solid #e2e8f0;border-radius:9px;margin-bottom:0;overflow:hidden;background:#fff}
+.sect-h{background:#f8fafc;padding:7px 10px;font-size:12px;font-weight:800;border-bottom:1.5px solid #e2e8f0}
+.sect-b{padding:8px 10px}
+.fld{margin-bottom:7px}.fld:last-child{margin-bottom:0}.fld label{font-size:11.5px;font-weight:800;display:block;margin-bottom:2px}
+.fld .hint{font-size:10.5px;color:#64748b;margin-top:2px}
+.tokgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-items:start}
+@media(max-width:1100px){.tokgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.tokgrid{grid-template-columns:1fr}}
+.savebar{position:sticky;bottom:10px;background:#0f2160;border-radius:10px;padding:9px 10px;margin-top:8px;box-shadow:0 8px 22px rgba(0,0,0,.25)}
 .okmsg{background:#dcfce7;border:1.5px solid #16a34a;color:#14532d;padding:9px;border-radius:8px;font-size:12.5px;font-weight:700;margin-bottom:8px}
 .helpdesk{background:#eff6ff;border:2px solid #1d4ed8;border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:12.5px}
 .mini{font-size:11.5px;color:#64748b;margin-top:6px;line-height:1.5}
@@ -164,32 +168,43 @@ kbd{background:#0f172a;color:#fff;padding:1px 7px;border-radius:6px;font-size:11
 <div class="d">Tanpa oprek kode.</div>
 <div id="tokMsg"></div>
 <form id="tokForm" method="POST" action="/settings">@csrf
-<div class="sect"><div class="sect-h">1. Kunci gateway (dibagikan ke PENERIMA)</div><div class="sect-b">
-<div class="fld"><label>GATEWAY_TOKEN</label><input class="txt" name="GATEWAY_TOKEN" value="{{ $setValues['GATEWAY_TOKEN'] ?? '' }}"></div>
+<div class="tokgrid">
+<div>
+<div class="sect"><div class="sect-h">1. Kunci gateway (ke PENERIMA)</div><div class="sect-b">
+<div class="fld"><label>GATEWAY_TOKEN</label><input class="txt" name="GATEWAY_TOKEN" value="{{ $setValues['GATEWAY_TOKEN'] ?? '' }}"><div class="hint">Header X-GW-KEY.</div></div>
 </div></div>
-<div class="sect"><div class="sect-h">2. MIS (crm.lsfragrance.id)</div><div class="sect-b">
+<br>
+<div class="sect"><div class="sect-h">6. Login panel ini</div><div class="sect-b">
+<div class="fld"><label>ADMIN_USER</label><input class="txt" name="ADMIN_USER" value="{{ $setValues['ADMIN_USER'] ?? '' }}"></div>
+<div class="fld"><label>ADMIN_PASS (kosong = tetap)</label><input class="txt" name="ADMIN_PASS" value="" placeholder="(tidak ganti)"></div>
+</div></div>
+</div>
+<div>
+<div class="sect"><div class="sect-h">2. MIS (crm)</div><div class="sect-b">
 <div class="fld"><label>MIS_BASE_URL</label><input class="txt" name="MIS_BASE_URL" value="{{ $setValues['MIS_BASE_URL'] ?? '' }}"></div>
-<div class="fld"><label>MIS_API_KEY (= API_SECRET_KEY di .env MIS)</label><input class="txt" name="MIS_API_KEY" value="{{ $setValues['MIS_API_KEY'] ?? '' }}"></div>
+<div class="fld"><label>MIS_API_KEY (= API_SECRET_KEY)</label><input class="txt" name="MIS_API_KEY" value="{{ $setValues['MIS_API_KEY'] ?? '' }}"></div>
 </div></div>
-<div class="sect"><div class="sect-h">3. AO (sys-af.lsfragrance.id)</div><div class="sect-b">
+<br>
+<div class="sect"><div class="sect-h">3. AO (sys-af)</div><div class="sect-b">
 <div class="fld"><label>AO_BASE_URL</label><input class="txt" name="AO_BASE_URL" value="{{ $setValues['AO_BASE_URL'] ?? '' }}"></div>
 <div class="fld"><label>AGENDA_TOKEN</label><input class="txt" name="AGENDA_TOKEN" value="{{ $setValues['AGENDA_TOKEN'] ?? '' }}"></div>
 <div class="fld"><label>AO_KEY (= X-AO-KEY)</label><input class="txt" name="AO_KEY" value="{{ $setValues['AO_KEY'] ?? '' }}"></div>
 </div></div>
-<div class="sect"><div class="sect-h">4. Transaksi (trans.lssoft88.xyz)</div><div class="sect-b">
+</div>
+<div>
+<div class="sect"><div class="sect-h">4. Transaksi (trans)</div><div class="sect-b">
 <div class="fld"><label>TRANS_BASE_URL</label><input class="txt" name="TRANS_BASE_URL" value="{{ $setValues['TRANS_BASE_URL'] ?? '' }}"></div>
 <div class="fld"><label>AO_API_KEY</label><input class="txt" name="AO_API_KEY" value="{{ $setValues['AO_API_KEY'] ?? '' }}"></div>
 <div class="fld"><label>USER_API_KEY</label><input class="txt" name="USER_API_KEY" value="{{ $setValues['USER_API_KEY'] ?? '' }}"></div>
 </div></div>
-<div class="sect"><div class="sect-h">5. Drive (drive.lssoft88.xyz)</div><div class="sect-b">
+<br>
+<div class="sect"><div class="sect-h">5. Drive</div><div class="sect-b">
 <div class="fld"><label>DRIVE_BASE_URL</label><input class="txt" name="DRIVE_BASE_URL" value="{{ $setValues['DRIVE_BASE_URL'] ?? '' }}"></div>
 <div class="fld"><label>DRIVE_API_KEY (opsional)</label><input class="txt" name="DRIVE_API_KEY" value="{{ $setValues['DRIVE_API_KEY'] ?? '' }}"></div>
 </div></div>
-<div class="sect"><div class="sect-h">6. Login panel ini</div><div class="sect-b">
-<div class="fld"><label>ADMIN_USER</label><input class="txt" name="ADMIN_USER" value="{{ $setValues['ADMIN_USER'] ?? '' }}"></div>
-<div class="fld"><label>ADMIN_PASS (kosongkan = tidak ganti)</label><input class="txt" name="ADMIN_PASS" value="" placeholder="(kosongkan = tidak ganti)"></div>
-</div></div>
-<button class="save" id="tokBtn">Simpan semua — berlaku langsung</button>
+</div>
+</div>
+<div class="savebar"><button class="save" id="tokBtn" style="margin-top:0">Simpan semua — berlaku langsung</button></div>
 </form>
 </div>
 </div>

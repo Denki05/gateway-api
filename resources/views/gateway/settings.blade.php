@@ -39,8 +39,8 @@ body{background:#e8edf3;color:#16233a;padding:0}
 @if(session('ok'))<div class="alert-ok">✅ {{ session('ok') }}</div>@endif
 <p class="lead">Isi cukup sekali di sini. <b>Berlaku langsung</b>, tidak perlu buka kode / restart. Kolom bertanda <b style="background:#fef9c3;padding:0 6px;border:1px solid #eab308;border-radius:6px">BELUM DIISI</b> berarti masih kosong dan wajib dilengkapi.</p>
 <form method="POST" action="/settings">@csrf
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 14px">
-<style>@media(max-width:900px){div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr !important}}</style>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 14px">
+<style>@media(max-width:1100px){div[style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr 1fr !important}}@media(max-width:700px){div[style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr !important}}</style>
 <div>
 @php
 function st($v){ return empty($v) ? '<span class="warntag empty">⚠ BELUM DIISI</span>' : '<span class="warntag filled">● Terisi</span>'; }
