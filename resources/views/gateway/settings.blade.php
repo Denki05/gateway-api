@@ -37,8 +37,8 @@ body{background:#eef2f7;color:#1e293b}
 </head><body>
 <div class="top"><div class="topin">
 <div style="font-size:22px">Gateway</div><h1>Gateway API</h1>
-<div class="nav"><a href="/">Panel</a><a href="/settings" class="btn-t on">Token</a><a href="/help">Bantuan</a>
-<form method="POST" action="/logout" style="display:inline">@csrf<button type="submit">Keluar</button></form></div>
+<div class="nav"><a href="/">🏠 Panel</a><a href="/settings" class="btn-t on">🔑 Token</a><a href="/help">❓ Bantuan</a>
+<form method="POST" action="/logout" style="display:inline">@csrf<button type="submit">🚪 Keluar</button></form></div>
 </div></div>
 <div class="wrap">
 @if(session('ok'))<div class="alert-ok">{{ session('ok') }}</div>@endif

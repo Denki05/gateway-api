@@ -42,6 +42,7 @@ input.txt{font-family:Consolas,monospace}
 .radio label{border:2px solid #94a3b8;border-radius:8px;padding:8px;font-size:11.5px;cursor:pointer;text-align:center;line-height:1.4}
 .radio label small{display:block;color:#64748b;font-weight:400}
 .radio input{display:none}
+.radio label.sel{border-color:#1d4ed8;background:#eff6ff;box-shadow:0 0 0 2px #bfdbfe}
 button.act{width:100%;background:#1d4ed8;color:#fff;border:none;padding:11px;border-radius:9px;font-size:13.5px;font-weight:800;cursor:pointer;margin-top:9px}
 button.act:disabled{background:#94a3b8;cursor:wait}
 button.save{width:100%;background:#16a34a;color:#fff;border:none;padding:12px;border-radius:9px;font-size:14px;font-weight:800;cursor:pointer;margin-top:10px}
@@ -67,8 +68,9 @@ td code{font-family:Consolas,monospace;font-size:11px;background:#f1f5f9;padding
 .fld{margin-bottom:7px}.fld:last-child{margin-bottom:0}.fld label{font-size:11.5px;font-weight:800;display:block;margin-bottom:2px}
 .fld .hint{font-size:10.5px;color:#64748b;margin-top:2px}
 .tokgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-items:start}
-@media(max-width:1100px){.tokgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:700px){.tokgrid{grid-template-columns:1fr}}
+.tokgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:1100px){.tokgrid,.tokgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.tokgrid,.tokgrid.two{grid-template-columns:1fr}}
 .savebar{position:sticky;bottom:10px;background:#0f2160;border-radius:10px;padding:9px 10px;margin-top:8px;box-shadow:0 8px 22px rgba(0,0,0,.25)}
 .okmsg{background:#dcfce7;border:1.5px solid #16a34a;color:#14532d;padding:9px;border-radius:8px;font-size:12.5px;font-weight:700;margin-bottom:8px}
 .helpdesk{background:#eff6ff;border:2px solid #1d4ed8;border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:12.5px}
@@ -79,10 +81,10 @@ kbd{background:#0f172a;color:#fff;padding:1px 7px;border-radius:6px;font-size:11
 <div class="top"><div class="topin">
 <div style="font-size:22px">Gateway</div><h1>Gateway API</h1>
 <div class="tabs" role="tablist">
-<button id="nav-panel" class="on" onclick="showTab('panel')">Panel</button>
-<button id="nav-token" class="btn-t" onclick="showTab('token')">Token</button>
-<button id="nav-help" onclick="showTab('help')">Bantuan</button>
-<form method="POST" action="/logout" style="display:inline">@csrf<button type="submit">Keluar</button></form>
+<button id="nav-panel" class="on" onclick="showTab('panel')">🏠 Panel</button>
+<button id="nav-token" class="btn-t" onclick="showTab('token')">🔑 Token</button>
+<button id="nav-help" onclick="showTab('help')">❓ Bantuan</button>
+<form method="POST" action="/logout" style="display:inline">@csrf<button type="submit">🚪 Keluar</button></form>
 </div>
 </div></div>
 <div class="wrap">
@@ -116,10 +118,10 @@ kbd{background:#0f172a;color:#fff;padding:1px 7px;border-radius:6px;font-size:11
 </div>
 <label class="f">3. Data <small>— minta apa</small></label>
 <select id="ep"></select>
-<label class="f">4. Jalur</label>
-<div class="radio">
-<label><input type="radio" name="mode" value="gateway" checked><b>Lewat gateway</b><small>Asli, kunci ditempel otomatis</small></label>
-<label><input type="radio" name="mode" value="langsung"><b>Langsung</b><small>Tanpa gateway, pembanding</small></label>
+<label class="f">4. Jalur <small>— yang biru = dipilih</small></label>
+<div class="radio" id="jalurBox">
+<label><input type="radio" name="mode" value="gateway" checked><b>↔ Lewat gateway</b><small>Asli, kunci ditempel otomatis</small></label>
+<label><input type="radio" name="mode" value="langsung"><b>→ Langsung</b><small>Tanpa gateway, pembanding</small></label>
 </div>
 <button class="act" id="goBtn" onclick="jalanTes()">Coba sekarang</button>
 <div class="out" id="out">Belum dicoba.</div>
@@ -142,41 +144,32 @@ kbd{background:#0f172a;color:#fff;padding:1px 7px;border-radius:6px;font-size:11
 <div class="d">Tanpa oprek kode.</div>
 <div id="tokMsg"></div>
 <form id="tokForm" method="POST" action="/settings">@csrf
-<div class="tokgrid">
-<div>
-<div class="sect"><div class="sect-h">1. Kunci gateway (ke PENERIMA)</div><div class="sect-b">
+<div class="tokgrid two">
+<div class="sect"><div class="sect-h">1. Kunci gateway <small>(ke PENERIMA)</small></div><div class="sect-b">
 <div class="fld"><label>GATEWAY_TOKEN</label><input class="txt" name="GATEWAY_TOKEN" value="{{ $setValues['GATEWAY_TOKEN'] ?? '' }}"><div class="hint">Header X-GW-KEY.</div></div>
 </div></div>
-<br>
-<div class="sect"><div class="sect-h">6. Login panel ini</div><div class="sect-b">
-<div class="fld"><label>ADMIN_USER</label><input class="txt" name="ADMIN_USER" value="{{ $setValues['ADMIN_USER'] ?? '' }}"></div>
-<div class="fld"><label>ADMIN_PASS (kosong = tetap)</label><input class="txt" name="ADMIN_PASS" value="" placeholder="(tidak ganti)"></div>
-</div></div>
-</div>
-<div>
-<div class="sect"><div class="sect-h">2. MIS (crm)</div><div class="sect-b">
+<div class="sect"><div class="sect-h">2. MIS <small>(crm)</small></div><div class="sect-b">
 <div class="fld"><label>MIS_BASE_URL</label><input class="txt" name="MIS_BASE_URL" value="{{ $setValues['MIS_BASE_URL'] ?? '' }}"></div>
 <div class="fld"><label>MIS_API_KEY (= API_SECRET_KEY)</label><input class="txt" name="MIS_API_KEY" value="{{ $setValues['MIS_API_KEY'] ?? '' }}"></div>
 </div></div>
-<br>
-<div class="sect"><div class="sect-h">3. AO (sys-af)</div><div class="sect-b">
+<div class="sect"><div class="sect-h">3. AO <small>(sys-af)</small></div><div class="sect-b">
 <div class="fld"><label>AO_BASE_URL</label><input class="txt" name="AO_BASE_URL" value="{{ $setValues['AO_BASE_URL'] ?? '' }}"></div>
 <div class="fld"><label>AGENDA_TOKEN</label><input class="txt" name="AGENDA_TOKEN" value="{{ $setValues['AGENDA_TOKEN'] ?? '' }}"></div>
 <div class="fld"><label>AO_KEY (= X-AO-KEY)</label><input class="txt" name="AO_KEY" value="{{ $setValues['AO_KEY'] ?? '' }}"></div>
 </div></div>
-</div>
-<div>
-<div class="sect"><div class="sect-h">4. Transaksi (trans)</div><div class="sect-b">
+<div class="sect"><div class="sect-h">4. Transaksi <small>(trans)</small></div><div class="sect-b">
 <div class="fld"><label>TRANS_BASE_URL</label><input class="txt" name="TRANS_BASE_URL" value="{{ $setValues['TRANS_BASE_URL'] ?? '' }}"></div>
 <div class="fld"><label>AO_API_KEY</label><input class="txt" name="AO_API_KEY" value="{{ $setValues['AO_API_KEY'] ?? '' }}"></div>
 <div class="fld"><label>USER_API_KEY</label><input class="txt" name="USER_API_KEY" value="{{ $setValues['USER_API_KEY'] ?? '' }}"></div>
 </div></div>
-<br>
 <div class="sect"><div class="sect-h">5. Drive</div><div class="sect-b">
 <div class="fld"><label>DRIVE_BASE_URL</label><input class="txt" name="DRIVE_BASE_URL" value="{{ $setValues['DRIVE_BASE_URL'] ?? '' }}"></div>
 <div class="fld"><label>DRIVE_API_KEY (opsional)</label><input class="txt" name="DRIVE_API_KEY" value="{{ $setValues['DRIVE_API_KEY'] ?? '' }}"></div>
 </div></div>
-</div>
+<div class="sect"><div class="sect-h">6. Login panel ini</div><div class="sect-b">
+<div class="fld"><label>ADMIN_USER</label><input class="txt" name="ADMIN_USER" value="{{ $setValues['ADMIN_USER'] ?? '' }}"></div>
+<div class="fld"><label>ADMIN_PASS (kosong = tetap)</label><input class="txt" name="ADMIN_PASS" value="" placeholder="(tidak ganti)"></div>
+</div></div>
 </div>
 <div class="savebar"><button class="save" id="tokBtn" style="margin-top:0">Simpan semua — berlaku langsung</button></div>
 </form>
@@ -229,6 +222,13 @@ function fillEp(){
   var s=document.getElementById('svc').value, ep=document.getElementById('ep');
   ep.innerHTML='';
   (UJI[s]||[]).forEach(function(e){var o=document.createElement('option');o.value=e.path;o.textContent=e.label;ep.appendChild(o);});
+}
+function syncRadio(){
+  var rs=document.querySelectorAll('#jalurBox input[type=radio]');
+  for(var i=0;i<rs.length;i++){
+    var lb=rs[i].closest('label');
+    if(lb)lb.classList.toggle('sel',rs[i].checked);
+  }
 }
 function stamp(){var d=new Date();document.getElementById('upd').textContent=d.toLocaleTimeString('id-ID');}
 async function loadStatus(silent){
@@ -285,7 +285,9 @@ document.getElementById('tokForm').addEventListener('submit',async function(e){
 (function(){
   var h=(location.hash||'').replace('#','');
   if(['panel','token','help'].indexOf(h)>=0)showTab(h);
-  fillEp(); loadStatus(false); startAuto();
+  fillEp(); loadStatus(false); startAuto(); syncRadio();
+  var rs=document.querySelectorAll('#jalurBox input[type=radio]');
+  for(var i=0;i<rs.length;i++){rs[i].addEventListener('change',syncRadio);}
 })();
 </script>
 </body></html>
