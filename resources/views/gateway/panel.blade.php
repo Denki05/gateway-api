@@ -272,7 +272,7 @@ async function jalanTes(){
   }catch(e){out.className='out fail';out.textContent='Gateway tidak menjawab: '+e.message;}
   btn.disabled=false; btn.textContent='Coba sekarang';
 }
-document.getElementById('tokForm').addEventListener('submit',async function(e){{
+document.getElementById('tokForm').addEventListener('submit',async function(e){
   e.preventDefault();
   var btn=document.getElementById('tokBtn'), msg=document.getElementById('tokMsg');
   btn.disabled=true; btn.textContent='Menyimpan...';
