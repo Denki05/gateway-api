@@ -46,7 +46,7 @@ input.txt{font-family:Consolas,monospace}
 button.act{width:100%;background:#1d4ed8;color:#fff;border:none;padding:11px;border-radius:9px;font-size:13.5px;font-weight:800;cursor:pointer;margin-top:9px}
 button.act:disabled{background:#94a3b8;cursor:wait}
 button.save{width:100%;background:#16a34a;color:#fff;border:none;padding:12px;border-radius:9px;font-size:14px;font-weight:800;cursor:pointer;margin-top:10px}
-.out{border-radius:9px;padding:10px;margin-top:9px;font-size:12.5px;line-height:1.6;white-space:pre-wrap;border:2px solid #e2e8f0;background:#f8fafc;color:#1e293b}
+.out{border-radius:9px;padding:10px;margin-top:9px;font-size:12px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;max-height:260px;overflow:auto;font-family:Consolas,monospace;border:2px solid #e2e8f0;background:#f8fafc;color:#1e293b}
 .out.ok{border-color:#16a34a;background:#f0fdf4}
 .out.fail{border-color:#dc2626;background:#fef2f2}
 .out a{color:#1d4ed8;font-weight:800}
@@ -266,9 +266,11 @@ async function jalanTes(){
   try{
     var r=await fetch(location.origin+'/test-endpoint',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-TOKEN':CSRF},body:JSON.stringify({konsumen:kons,service:svc,path:ep,mode:mode})});
     var jj=await r.json();
-    if(jj.success&&jj.http<400){out.className='out ok';out.textContent='BERHASIL ('+jj.http+', '+jj.ms+'ms). Siap dipakai.\n\n'+(jj.body||'').substring(0,300);}
+    var bodyTxt=(jj.body||'').substring(0,1500);
+    try{var pj=JSON.parse(jj.body||'');bodyTxt=JSON.stringify(pj,null,1).substring(0,1500);}catch(ee){}
+    if(jj.success&&jj.http<400){out.className='out ok';out.textContent='BERHASIL ('+jj.http+', '+jj.ms+'ms). Siap dipakai. ('+bodyTxt.length+' char, discroll ke bawah)\n\n'+bodyTxt;}
     else if(jj.http===401){out.className='out fail';out.innerHTML='Kunci salah (401). Buka tab Token, perbaiki, Simpan, coba lagi.';}
-    else{out.className='out fail';out.textContent='Gagal ('+(jj.http||'no-res')+'). '+(jj.body||jj.error||'').substring(0,300);}
+    else{out.className='out fail';out.textContent='Gagal ('+(jj.http||'no-res')+'). '+(jj.body||jj.error||'').substring(0,800);}
   }catch(e){out.className='out fail';out.textContent='Gateway tidak menjawab: '+e.message;}
   btn.disabled=false; btn.textContent='Coba sekarang';
 }
