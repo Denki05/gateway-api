@@ -80,8 +80,6 @@ kbd{background:#0f172a;color:#fff;padding:1px 7px;border-radius:6px;font-size:11
 <div style="font-size:22px">Gateway</div><h1>Gateway API</h1>
 <div class="tabs" role="tablist">
 <button id="nav-panel" class="on" onclick="showTab('panel')">Panel</button>
-<button id="nav-rute" onclick="showTab('rute')">Rute</button>
-<button id="nav-cutover" onclick="showTab('cutover')">Cutover</button>
 <button id="nav-token" class="btn-t" onclick="showTab('token')">Token</button>
 <button id="nav-help" onclick="showTab('help')">Bantuan</button>
 <form method="POST" action="/logout" style="display:inline">@csrf<button type="submit">Keluar</button></form>
@@ -136,30 +134,6 @@ kbd{background:#0f172a;color:#fff;padding:1px 7px;border-radius:6px;font-size:11
 </table>
 <p class="mini">200 = siap. 401 = perbaiki Token. Lainnya = lihat Bantuan.</p>
 </div>
-</div>
-</div>
-<div class="tabpage" id="tab-rute">
-<div class="card">
-<h2>Peta rute: gateway ke PUSAT</h2>
-<div class="d">PENERIMA memanggil kolom <b>Gateway</b> lalu gateway meneruskan ke <b>PUSAT</b>. Aktif = bisa dipakai hari ini.</div>
-<table><tr><th>Metode</th><th>Gateway (panggil ini)</th><th>PUSAT (tujuan)</th><th>Kunci</th><th>Status</th><th>Pemakai</th></tr>
-@foreach($routesRows as $r)
-<tr><td><span class="mtd">{{ $r[0] }}</span></td><td><code>{{ $r[1] }}</code></td><td><code>{{ $r[2] }}</code></td><td>{{ $r[3] }}</td><td><span class="st {{ strpos($r[4],'Aktif')!==false?'okk':'next' }}">{{ $r[4] }}</span></td><td>{{ $r[5] }}</td></tr>
-@endforeach
-</table>
-</div>
-</div>
-<div class="tabpage" id="tab-cutover">
-<div class="card">
-<h2>Checklist cutover (weekend)</h2>
-<div style="font-size:13px"><b id="coDone">{{ $cutoverDone }}/{{ $cutoverTotal }}</b> selesai</div>
-<div class="bar"><div id="coBar" style="width:{{ $cutoverTotal?round($cutoverDone/$cutoverTotal*100):0 }}%"></div></div>
-<div id="coMsg"></div>
-<form id="coForm" method="POST" action="/cutover">@csrf
-@foreach($cutoverItems as $it)
-<label class="item {{ $it['done']?'done':'' }}"><input type="checkbox" name="done[]" value="{{ $it['id'] }}" {{ $it['done']?'checked':'' }} onchange="saveCutover()"><span>{{ $it['nama'] }}</span></label>
-@endforeach
-</form>
 </div>
 </div>
 <div class="tabpage" id="tab-token">
@@ -298,17 +272,7 @@ async function jalanTes(){
   }catch(e){out.className='out fail';out.textContent='Gateway tidak menjawab: '+e.message;}
   btn.disabled=false; btn.textContent='Coba sekarang';
 }
-async function saveCutover(){
-  var form=document.getElementById('coForm');
-  var fd=new FormData(form);
-  await fetch('/cutover',{method:'POST',headers:{'X-CSRF-TOKEN':CSRF},body:fd});
-  var boxes=form.querySelectorAll('input[type=checkbox]');
-  var done=0; boxes.forEach(function(b){if(b.checked)done++;b.closest('.item').classList.toggle('done',b.checked);});
-  document.getElementById('coDone').textContent=done+'/'+boxes.length;
-  document.getElementById('coBar').style.width=(boxes.length?Math.round(done/boxes.length*100):0)+'%';
-  document.getElementById('coMsg').innerHTML='<div class="okmsg">Progres tersimpan.</div>';
-}
-document.getElementById('tokForm').addEventListener('submit',async function(e){
+document.getElementById('tokForm').addEventListener('submit',async function(e){{
   e.preventDefault();
   var btn=document.getElementById('tokBtn'), msg=document.getElementById('tokMsg');
   btn.disabled=true; btn.textContent='Menyimpan...';
@@ -320,7 +284,7 @@ document.getElementById('tokForm').addEventListener('submit',async function(e){
 });
 (function(){
   var h=(location.hash||'').replace('#','');
-  if(['panel','rute','cutover','token','help'].indexOf(h)>=0)showTab(h);
+  if(['panel','token','help'].indexOf(h)>=0)showTab(h);
   fillEp(); loadStatus(false); startAuto();
 })();
 </script>

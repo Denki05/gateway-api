@@ -25,7 +25,7 @@ kbd{background:#0f172a;color:#fff;padding:1px 7px;border-radius:6px;font-size:11
 </head><body>
 <div class="top"><div class="topin">
 <div style="font-size:22px">🚪</div><h1>Gateway API</h1>
-<div class="nav"><a href="/">Panel</a><a href="/routes">Rute</a><a href="/cutover">Cutover</a><a href="/settings" class="btn-t">Token</a><a href="/help" class="on">Bantuan</a>
+<div class="nav"><a href="/">Panel</a><a href="/settings" class="btn-t">Token</a><a href="/help" class="on">Bantuan</a>
 <form method="POST" action="/logout" style="display:inline">@csrf<button type="submit">Keluar</button></form></div>
 </div></div>
 <div class="wrap">

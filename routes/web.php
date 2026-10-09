@@ -21,8 +21,5 @@ Route::middleware('admin.auth')->group(function () {
     Route::get('/settings', 'SettingsController@show');
     Route::post('/settings', 'SettingsController@save');
     Route::get('/help', 'GatewayController@help');
-    Route::get('/routes', 'GatewayController@routes');
-    Route::get('/cutover', 'CutoverController@show');
-    Route::post('/cutover', 'CutoverController@save');
     Route::post('/test-endpoint', 'GatewayController@testEndpoint');
 });
