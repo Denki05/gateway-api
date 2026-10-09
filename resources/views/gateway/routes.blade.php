@@ -25,8 +25,8 @@ td code{font-family:Consolas,monospace;font-size:11px;background:#f1f5f9;padding
 </head><body>
 <div class="top"><div class="topin">
 <div style="font-size:22px">🚪</div><h1>Gateway API</h1>
-<div class="nav"><a href="/">🏠 Panel</a><a href="/routes" class="on">🗺️ Rute</a><a href="/cutover">✅ Cutover</a><a href="/settings" class="btn-t">🔑 Token</a><a href="/help">❓ Bantuan</a>
-<form method="POST" action="/logout" style="display:inline">@csrf<button type="submit">🚪 Keluar</button></form></div>
+<div class="nav"><a href="/">Panel</a><a href="/routes" class="on">Rute</a><a href="/cutover">Cutover</a><a href="/settings" class="btn-t">Token</a><a href="/help">Bantuan</a>
+<form method="POST" action="/logout" style="display:inline">@csrf<button type="submit">Keluar</button></form></div>
 </div></div>
 <div class="wrap">
 <div class="card">

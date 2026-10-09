@@ -11,10 +11,10 @@ body{background:#eef2f7;color:#1e293b}
 .nav a,.nav button{font-size:12.5px;font-weight:700;padding:7px 12px;border-radius:8px;text-decoration:none;cursor:pointer;border:none}
 .nav a{background:rgba(255,255,255,.12);color:#fff}.nav a.on{background:#fff;color:#0f2160}
 .nav .btn-t{background:#16a34a;color:#fff}
-.wrap{max-width:960px;margin:0 auto;padding:14px 14px 40px}
-.card{background:#fff;border:1.5px solid #cbd5e1;border-radius:12px;padding:14px 16px;margin-bottom:10px}
-.card h2{font-size:14px;margin-bottom:6px}
-p,li{font-size:13px;line-height:1.65;color:#334155}
+.wrap{max-width:1280px;margin:0 auto;padding:12px 14px 28px}
+.card{background:#fff;border:1.5px solid #cbd5e1;border-radius:10px;padding:12px 14px;margin-bottom:10px}
+.card h2{font-size:13.5px;margin-bottom:6px}
+p,li{font-size:12.5px;line-height:1.6;color:#334155}
 ul,ol{margin:6px 0 0 20px}
 table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:8px}
 th{background:#0f172a;color:#fff;padding:7px 8px;text-align:left;font-size:11px}
@@ -25,11 +25,11 @@ kbd{background:#0f172a;color:#fff;padding:1px 7px;border-radius:6px;font-size:11
 </head><body>
 <div class="top"><div class="topin">
 <div style="font-size:22px">🚪</div><h1>Gateway API</h1>
-<div class="nav"><a href="/">🏠 Panel</a><a href="/routes">🗺️ Rute</a><a href="/cutover">✅ Cutover</a><a href="/settings" class="btn-t">🔑 Token</a><a href="/help" class="on">❓ Bantuan</a>
-<form method="POST" action="/logout" style="display:inline">@csrf<button style="background:rgba(255,255,255,.12);color:#fff" class="nav" type="submit">🚪 Keluar</button></form></div>
+<div class="nav"><a href="/">Panel</a><a href="/routes">Rute</a><a href="/cutover">Cutover</a><a href="/settings" class="btn-t">Token</a><a href="/help" class="on">Bantuan</a>
+<form method="POST" action="/logout" style="display:inline">@csrf<button type="submit">Keluar</button></form></div>
 </div></div>
 <div class="wrap">
-<div class="helpdesk">🛟 <b>Helpdesk gateway:</b> kalau panel menunjukkan merah / tes gagal dan panduan di bawah belum membantu, hubungi <b>tim IT (admin gateway)</b> sertakan: jam kejadian + nama PENERIMA + nama PUSAT + hasil tes (copy teksnya). Jangan kirim kunci asli lewat chat umum.</div>
+<div class="helpdesk">Helpdesk gateway: kalau panel menunjukkan merah / tes gagal dan panduan di bawah belum membantu, hubungi <b>tim IT (admin gateway)</b> sertakan: jam kejadian + nama PENERIMA + nama PUSAT + hasil tes (copy teksnya). Jangan kirim kunci asli lewat chat umum.</div>
 <div class="card">
 <h2>📖 Istilah baku (dipakai di semua halaman)</h2>
 <table><tr><th>Istilah</th><th>Artinya</th><th>Contoh</th></tr>

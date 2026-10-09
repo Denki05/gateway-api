@@ -19,6 +19,8 @@ return [
 
     'timeout' => env('GATEWAY_TIMEOUT', 10),
 
+    'verify' => env('GATEWAY_VERIFY_SSL', true),
+
     'services' => [
         'mis' => [
             'base_url' => $sv('MIS_BASE_URL', 'https://crm.lsfragrance.id'),
