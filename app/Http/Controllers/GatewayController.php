@@ -138,7 +138,7 @@ class GatewayController extends Controller
         ];
         $cutoverItems = \App\Http\Controllers\CutoverController::load();
         $cutoverDone = collect($cutoverItems)->where('done', true)->count();
-        return view('gateway.dashboard', [
+        return view('gateway.panel', [
             'gwToken' => $gw['token'],
             'pusat' => $pusat,
             'konsumen' => $konsumen,
